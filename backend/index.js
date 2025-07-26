@@ -1,18 +1,31 @@
-import mongoose from "mongoose";
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import authRoutes from './routes/auth.js';
+import protectedRoutes from './routes/protected.js';
 
-const connectDB = async () => {
-    try {
-        const connectionInstance = await mongoose.connect(process.env.MONGODB_URI, {
-            dbName: process.env.DB_NAME
-        });
+// Load environment variables
+dotenv.config();
 
-        console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
-        
-    } catch (error) {
-        // Log the full error object for a more detailed stack trace
-        console.log("MONGODB connection FAILED ", error);
-        process.exit(1);
-    }
-}
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-export default connectDB;
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/protected', protectedRoutes);
+
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('MongoDB connected');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => {
+    console.error('MongoDB connection error:', err);
+  }); 
