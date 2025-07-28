@@ -1,8 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import authRoutes from './routes/auth.js';
-import protectedRoutes from './routes/protected.js';
+import authRoutes from './src/routes/auth.js';
+import protectedRoutes from './src/routes/protected.js';
 
 // Load environment variables
 dotenv.config();
