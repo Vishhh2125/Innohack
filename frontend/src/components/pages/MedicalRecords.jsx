@@ -156,14 +156,16 @@ const MedicalRecords = () => {
             </Button>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {records.map((record) => (
-              <Card key={record.id} className="flex flex-col md:flex-row items-center md:items-stretch p-0 overflow-hidden group hover:shadow-xl transition-shadow">
-                <div className="flex items-center justify-center bg-primary/10 md:w-32 w-full py-6 md:py-0">
-                  <FileText className="w-10 h-10 text-primary" />
+              <Card key={record.id} className="flex flex-col h-full p-0 overflow-hidden group hover:shadow-xl transition-shadow">
+                {/* Side Icon Area */}
+                <div className="flex items-center justify-center bg-primary/10 w-full h-28">
+                  <FileText className="w-12 h-12 text-primary" />
                 </div>
-                <div className="flex-1 px-6 py-4 flex flex-col justify-center">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
+                {/* Details */}
+                <div className="flex-1 px-6 py-5 flex flex-col justify-center">
+                  <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors mb-1">
                     {record.title}
                   </h3>
                   <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-2">
@@ -173,7 +175,7 @@ const MedicalRecords = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex items-center px-6 md:px-4 py-4 md:py-0">
+                <div className="flex items-center justify-end px-6 pb-4">
                   <ChevronRight className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
               </Card>
